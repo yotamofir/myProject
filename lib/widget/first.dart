@@ -14,13 +14,13 @@ class _FirstTimeState extends State<FirstTime> {
       child: Container(
         alignment: Alignment.topRight,
         //color: Colors.red,
-        height: 20,
+        height: 25,
         child: Row(
           children: <Widget>[
             Text(
               'Your first time?',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 20,
                 color: Colors.white70,
               ),
             ),
@@ -33,7 +33,7 @@ class _FirstTimeState extends State<FirstTime> {
               child: Text(
                 'Sing up',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 20,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.right,

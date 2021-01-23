@@ -35,16 +35,12 @@ class _ButtonNewUserState extends State<ButtonNewUser> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'OK',
+                'Sign up',
                 style: TextStyle(
                   color: Colors.lightBlueAccent,
-                  fontSize: 14,
+                  fontSize: 26,
                   fontWeight: FontWeight.w700,
                 ),
-              ),
-              Icon(
-                Icons.arrow_forward,
-                color: Colors.lightBlueAccent,
               ),
             ],
           ),

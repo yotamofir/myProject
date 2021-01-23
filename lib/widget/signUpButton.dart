@@ -39,7 +39,7 @@ class _ButtonLoginState extends State<SigninButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Sign In',
+                'Sign Up',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 34,

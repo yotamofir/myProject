@@ -9,13 +9,13 @@ class UserOld extends StatelessWidget {
       child: Container(
         alignment: Alignment.topRight,
         //color: Colors.red,
-        height: 20,
+        height: 25,
         child: Row(
           children: <Widget>[
             Text(
-              'Have we met before?',
+              'Already have account?',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 20,
                 color: Colors.white70,
               ),
             ),
@@ -28,7 +28,7 @@ class UserOld extends StatelessWidget {
               child: Text(
                 'Sing in',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 20,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.right,
