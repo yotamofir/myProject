@@ -1,4 +1,4 @@
-package com.example.login_minimalist
+package com.example.BookIt
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

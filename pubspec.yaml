@@ -1,4 +1,4 @@
-name: login_minimalist
+name: BookIt
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -23,7 +23,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+4
 
 dev_dependencies:
   flutter_test:
@@ -42,9 +43,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-# assets:
-#   - assets/done.json
- 
+  # assets:
+  #   - assets/done.json
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

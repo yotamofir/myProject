@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_minimalist/pages/login.page.dart';
+import 'package:BookIt/pages/login.page.dart';
 
 void main() => runApp(MyApp());
 

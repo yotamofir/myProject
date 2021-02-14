@@ -9,6 +9,7 @@
 .history
 .svn/
 
+Pods/
 # IntelliJ related
 *.iml
 *.ipr
