@@ -1,3 +1,4 @@
+import 'package:BookIt/models/user.dart';
 import 'package:BookIt/services/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:BookIt/widget/singup.dart';
@@ -24,6 +25,7 @@ class _NewUserState extends State<NewUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -138,7 +140,7 @@ class _NewUserState extends State<NewUser> {
                           setState(() => error = 'Please supply a valid email');
                         } else{
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => HomePage()));
+                              MaterialPageRoute(builder: (context) => HomePage(result: result.toString())));
                         }
                       }
                     },

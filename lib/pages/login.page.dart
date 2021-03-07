@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -113,13 +114,13 @@ class _LoginPageState extends State<LoginPage> {
                         if (result == null) {
                           setState(() => error = 'Incorrect email or password');
                         } else{
+                          print(result);
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => HomePage()));
+                              MaterialPageRoute(builder: (context) => HomePage(result: result.toString())));
                         }
                       }
                     },
                     child: Row(
-
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(

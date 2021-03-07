@@ -1,5 +1,7 @@
+import 'package:BookIt/pages/home.page.dart';
 import 'package:flutter/material.dart';
 import 'package:BookIt/pages/login.page.dart';
+import 'package:BookIt/pages/newBook.page.dart';
 
 void main() => runApp(MyApp());
 
