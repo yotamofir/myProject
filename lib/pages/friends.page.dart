@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
-class HomePage extends StatefulWidget {
+class FriendPage extends StatefulWidget {
   Map data;
   final String result;
-  HomePage({Key key, @required this.result}) : super(key: key);
+  FriendPage({Key key, @required this.result}) : super(key: key);
 
 
 
   @override
-  _HomePageState createState() => _HomePageState(result);
+  _FriendPageState createState() => _FriendPageState(result);
 }
 
-class _HomePageState extends State<HomePage> {
+class _FriendPageState extends State<FriendPage> {
 
   Map data;
   String uid;
-  _HomePageState(this.uid);
+  _FriendPageState(this.uid);
 
   Future<String> fetchData(String uid) async{
     String books = '';
@@ -53,10 +53,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        title: Text('My Books',
-        style: TextStyle(
-          fontSize: 28
-        ),),
+        title: Text('Profile',
+          style: TextStyle(
+              fontSize: 28
+          ),),
         centerTitle: true,
         backgroundColor: Colors.black45,
       ),
@@ -66,24 +66,24 @@ class _HomePageState extends State<HomePage> {
           children: [
             SizedBox(height: 50,),
             FutureBuilder<String>(
-              future: fetchData(uid),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(
-                    snapshot.data,
-                    style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                    ),
-                  );
-                } else {
-                  return Text(
-                    'Loading...',
-                    style: TextStyle(
-                        color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                    ),
-                  );
+                future: fetchData(uid),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      snapshot.data,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                      ),
+                    );
+                  } else {
+                    return Text(
+                      'Loading...',
+                      style: TextStyle(
+                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                      ),
+                    );
+                  }
                 }
-              }
             ),
           ],
         ),
