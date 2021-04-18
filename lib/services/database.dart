@@ -18,6 +18,4 @@ class DatabaseService{
       'password' : password,
     });
   }
-
-
 }

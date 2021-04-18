@@ -1,6 +1,5 @@
 
-
-import 'package:BookIt/pages/newBook.page.dart';
+import 'package:BookIt/pages/addImage.page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -53,10 +52,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        title: Text('My Books',
-        style: TextStyle(
-          fontSize: 28
-        ),),
+        title: Text('Files',
+          style: TextStyle(
+              fontSize: 28
+          ),),
         centerTitle: true,
         backgroundColor: Colors.black45,
       ),
@@ -66,24 +65,24 @@ class _HomePageState extends State<HomePage> {
           children: [
             SizedBox(height: 50,),
             FutureBuilder<String>(
-              future: fetchData(uid),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(
-                    snapshot.data,
-                    style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                    ),
-                  );
-                } else {
-                  return Text(
-                    'Loading...',
-                    style: TextStyle(
-                        color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                    ),
-                  );
+                future: fetchData(uid),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      snapshot.data,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                      ),
+                    );
+                  } else {
+                    return Text(
+                      'Loading...',
+                      style: TextStyle(
+                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                      ),
+                    );
+                  }
                 }
-              }
             ),
           ],
         ),
@@ -93,10 +92,10 @@ class _HomePageState extends State<HomePage> {
         child: FloatingActionButton(
           backgroundColor: Colors.indigo,
           child: Icon(Icons.add, size: 40),
-          onPressed: () async{
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NewBook(result: uid)));
-          },
+         // onPressed: () async{
+         //   Navigator.push(context,
+         //       MaterialPageRoute(builder: (context) => NewBook(result: uid)));
+        //  },
         ),
       ),
     );

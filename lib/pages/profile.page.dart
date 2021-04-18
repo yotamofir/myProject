@@ -1,6 +1,6 @@
 
 
-import 'package:BookIt/pages/newBook.page.dart';
+import 'package:BookIt/pages/addImage.page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -22,25 +22,15 @@ class _FriendPageState extends State<FriendPage> {
   String uid;
   _FriendPageState(this.uid);
 
-  Future<String> fetchData(String uid) async{
-    String books = '';
-    QuerySnapshot querySnapshot = await Firestore.instance.collection('user').document(uid).collection('book').getDocuments();
-    print(querySnapshot.documents.length);
-    if(querySnapshot.documents.length<1){
-      return 'You have no books now, please press the + to add one';
-    }else {
-      for (int i = 0; i < querySnapshot.documents.length; i++) {
-        books += (i + 1).toString() + '. Title: ' +
-            querySnapshot.documents[i].data['title'].toString() + ', Author: ' +
-            querySnapshot.documents[i].data['author'].toString() +
-            ', Category: ' +
-            querySnapshot.documents[i].data['category'].toString() +
-            ', Year: ' + querySnapshot.documents[i].data['year'].toString() +
-            '\n\n';
-        print(books);
-      }
-      return books;
-    }
+  Future<List<String>> fetchData(String uid) async{
+    String info = '';
+
+    DocumentSnapshot snapshot = await Firestore.instance.collection('user').document(uid).get();
+
+    info += ('\n Username: ' + snapshot.data['name'].toString()) + (', Email: ' + snapshot.data['email'].toString());
+    List<String> spec_list = info.split(", ");
+
+    return spec_list;
   }
 
 
@@ -59,27 +49,51 @@ class _FriendPageState extends State<FriendPage> {
           ),),
         centerTitle: true,
         backgroundColor: Colors.black45,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child:GestureDetector(
+
+              onTap: () { /* Write listener code here */ },
+                child: Icon(
+                  Icons.edit,
+                  size: 30,
+            // add custom icons also
+          ),
+        ),
       ),
+      ],
+      ),
+
       body: Container(
+
 
         child: Column(
           children: [
-            SizedBox(height: 50,),
-            FutureBuilder<String>(
+
+
+
+
+
+
+            FutureBuilder<List<String>>(
                 future: fetchData(uid),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Text(
-                      snapshot.data,
+                      snapshot.data[0] + '\n' + snapshot.data[1],
                       style: TextStyle(
-                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                          color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold
                       ),
                     );
+
+
+
                   } else {
                     return Text(
                       'Loading...',
                       style: TextStyle(
-                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
+                          color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold
                       ),
                     );
                   }
@@ -94,8 +108,8 @@ class _FriendPageState extends State<FriendPage> {
           backgroundColor: Colors.indigo,
           child: Icon(Icons.add, size: 40),
           onPressed: () async{
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NewBook(result: uid)));
+        //    Navigator.push(context,
+        //        MaterialPageRoute(builder: (context) => NewBook(result: uid)));
           },
         ),
       ),
