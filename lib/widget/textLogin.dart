@@ -21,7 +21,7 @@ class _TextLoginState extends State<TextLogin> {
             ),
             Center(
               child: Text(
-                'BookIt',
+                'Photo Gallery',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.w900,

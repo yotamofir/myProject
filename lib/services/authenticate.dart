@@ -6,14 +6,14 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User _userFromFirebaseUser(FirebaseUser user){
-    return user != null ? User(uid: user.uid) : null;
+  UserAuth _userFromFirebaseUser(User user){
+    return user != null ? UserAuth(uid: user.uid) : null;
   }
 
   Future registerWithEmailAndPassword(String name, String email, String password) async{
     try{
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email.trim(), password: password.trim());
-      FirebaseUser user = result.user;
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email.trim(), password: password.trim());
+      User user = result.user;
 
       await DatabaseService(uid: user.uid).updateUserData(name, email, password);
       return _userFromFirebaseUser(user).uid;
@@ -25,8 +25,8 @@ class AuthService {
 
   Future signInWithEmailAndPassword(String email, String password) async{
     try{
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email.trim(), password: password.trim());
-      FirebaseUser user = result.user;
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email.trim(), password: password.trim());
+      User user = result.user;
       return _userFromFirebaseUser(user).uid;
     } catch(e){
       print(e.toString());

@@ -1,7 +1,12 @@
-
-import 'package:BookIt/pages/addImage.page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path/path.dart';
+import 'dart:async';
+import 'package:BookIt/pages/profile.page.dart';
+import 'package:BookIt/pages/addImage.page.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -9,94 +14,79 @@ class HomePage extends StatefulWidget {
   final String result;
   HomePage({Key key, @required this.result}) : super(key: key);
 
-
-
   @override
   _HomePageState createState() => _HomePageState(result);
 }
 
 class _HomePageState extends State<HomePage> {
 
-  Map data;
   String uid;
   _HomePageState(this.uid);
 
-  Future<String> fetchData(String uid) async{
-    String books = '';
-    QuerySnapshot querySnapshot = await Firestore.instance.collection('user').document(uid).collection('book').getDocuments();
-    print(querySnapshot.documents.length);
-    if(querySnapshot.documents.length<1){
-      return 'You have no books now, please press the + to add one';
-    }else {
-      for (int i = 0; i < querySnapshot.documents.length; i++) {
-        books += (i + 1).toString() + '. Title: ' +
-            querySnapshot.documents[i].data['title'].toString() + ', Author: ' +
-            querySnapshot.documents[i].data['author'].toString() +
-            ', Category: ' +
-            querySnapshot.documents[i].data['category'].toString() +
-            ', Year: ' + querySnapshot.documents[i].data['year'].toString() +
-            '\n\n';
-        print(books);
-      }
-      return books;
-    }
-  }
-
-
   @override
   Widget build(BuildContext context) {
+
     String uid = widget.result;
 
-
-    //print(books);
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        title: Text('Files',
+        title: Text('Gallery',
           style: TextStyle(
               fontSize: 28
           ),),
         centerTitle: true,
         backgroundColor: Colors.black45,
-      ),
-      body: Container(
-
-        child: Column(
-          children: [
-            SizedBox(height: 50,),
-            FutureBuilder<String>(
-                future: fetchData(uid),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(
-                      snapshot.data,
-                      style: TextStyle(
-                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                      ),
-                    );
-                  } else {
-                    return Text(
-                      'Loading...',
-                      style: TextStyle(
-                          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold
-                      ),
-                    );
-                  }
-                }
+        actions: [
+          FlatButton(
+            onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => (ProfilePage(result: uid))));
+            },
+            child: Text(
+              'profile',
+              style: TextStyle(color: Colors.white),
             ),
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: Container(
-        height: 150,
-        child: FloatingActionButton(
-          backgroundColor: Colors.indigo,
-          child: Icon(Icons.add, size: 40),
-         // onPressed: () async{
-         //   Navigator.push(context,
-         //       MaterialPageRoute(builder: (context) => NewBook(result: uid)));
-        //  },
+        height: 70.0,
+        width: 70.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+              child: Icon(Icons.add),
+              backgroundColor: Colors.indigo,
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => AddImage()));
+              }),
         ),
+      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('imageURLs').snapshots(),
+        builder: (context, snapshot){
+          return !snapshot.hasData
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Container(
+            padding: EdgeInsets.all(4),
+            child: GridView.builder(
+                itemCount: snapshot.data.documents.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemBuilder: (context, index){
+                  return Container(
+                    margin: EdgeInsets.all(3),
+                    child: FadeInImage.memoryNetwork(
+                        fit: BoxFit.cover,
+                        placeholder: kTransparentImage,
+                        image: snapshot.data.documents[index].get('url')),
+                  );
+                }),
+          );
+        },
       ),
     );
   }

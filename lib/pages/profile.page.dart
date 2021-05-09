@@ -5,29 +5,29 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
-class FriendPage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   Map data;
   final String result;
-  FriendPage({Key key, @required this.result}) : super(key: key);
+  ProfilePage({Key key, @required this.result}) : super(key: key);
 
 
 
   @override
-  _FriendPageState createState() => _FriendPageState(result);
+  _ProfilePageState createState() => _ProfilePageState(result);
 }
 
-class _FriendPageState extends State<FriendPage> {
+class _ProfilePageState extends State<ProfilePage> {
 
   Map data;
   String uid;
-  _FriendPageState(this.uid);
+  _ProfilePageState(this.uid);
 
   Future<List<String>> fetchData(String uid) async{
     String info = '';
 
-    DocumentSnapshot snapshot = await Firestore.instance.collection('user').document(uid).get();
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('user').doc(uid).get();
 
-    info += ('\n Username: ' + snapshot.data['name'].toString()) + (', Email: ' + snapshot.data['email'].toString());
+    info += ('\n Username: ' + snapshot.data()['name'].toString()) + (',  Email: ' + snapshot.data()['email'].toString());
     List<String> spec_list = info.split(", ");
 
     return spec_list;
@@ -49,20 +49,6 @@ class _FriendPageState extends State<FriendPage> {
           ),),
         centerTitle: true,
         backgroundColor: Colors.black45,
-          actions: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child:GestureDetector(
-
-              onTap: () { /* Write listener code here */ },
-                child: Icon(
-                  Icons.edit,
-                  size: 30,
-            // add custom icons also
-          ),
-        ),
-      ),
-      ],
       ),
 
       body: Container(
@@ -70,12 +56,6 @@ class _FriendPageState extends State<FriendPage> {
 
         child: Column(
           children: [
-
-
-
-
-
-
             FutureBuilder<List<String>>(
                 future: fetchData(uid),
                 builder: (context, snapshot) {
@@ -86,9 +66,6 @@ class _FriendPageState extends State<FriendPage> {
                           color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold
                       ),
                     );
-
-
-
                   } else {
                     return Text(
                       'Loading...',
@@ -106,7 +83,7 @@ class _FriendPageState extends State<FriendPage> {
         height: 150,
         child: FloatingActionButton(
           backgroundColor: Colors.indigo,
-          child: Icon(Icons.add, size: 40),
+          child: Icon(Icons.edit, size: 35),
           onPressed: () async{
         //    Navigator.push(context,
         //        MaterialPageRoute(builder: (context) => NewBook(result: uid)));
