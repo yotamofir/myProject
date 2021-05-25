@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:BookIt/services/authenticate.dart';
-import 'package:BookIt/widget/first.dart';
-import 'package:BookIt/widget/textLogin.dart';
-import 'package:BookIt/widget/verticalText.dart';
-import 'package:BookIt/pages/home.page.dart';
+
+import '../services/authenticate.dart';
+import '../widget/first.dart';
+import '../widget/textLogin.dart';
+import '../widget/verticalText.dart';
+import 'home.page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -45,50 +45,41 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               TextFormField(
-                validator: (val) => val.isEmpty ? 'Enter an Email' : null,
-                onChanged: (val){
+                onChanged: (val) {
                   setState(() => email = val);
                 },
                 decoration: new InputDecoration(
                   labelText: 'Email',
-                  contentPadding: const EdgeInsets.only(top: 50, left: 50, right: 50),
-                  errorStyle: TextStyle(
-                      fontSize: 20
-                  ),
+                  contentPadding:
+                      const EdgeInsets.only(top: 50, left: 50, right: 50),
+                  errorStyle: TextStyle(fontSize: 20),
                   labelStyle: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                   ),
                 ),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24
-                ),
+                style: TextStyle(color: Colors.black, fontSize: 24),
               ),
               TextFormField(
                 obscureText: true,
-                validator: (val) => val.length < 6 ? 'Enter a Password 6+ chars long' : null,
-                onChanged: (val){
+                onChanged: (val) {
                   setState(() => password = val);
                 },
                 decoration: new InputDecoration(
                   labelText: 'Password',
-                  contentPadding: const EdgeInsets.only(top: 50, left: 50, right: 50),
-                  errorStyle: TextStyle(
-                      fontSize: 20
-                  ),
+                  contentPadding:
+                      const EdgeInsets.only(top: 50, left: 50, right: 50),
+                  errorStyle: TextStyle(fontSize: 20),
                   labelStyle: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                   ),
                 ),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24
-                ),
+                style: TextStyle(color: Colors.black, fontSize: 24),
               ),
               RaisedButton(
-                padding: const EdgeInsets.only(top: 40, right: 50, left: 200, bottom: 50),
+                padding: const EdgeInsets.only(
+                    top: 40, right: 50, left: 200, bottom: 50),
                 child: Container(
                   alignment: Alignment.bottomRight,
                   height: 50,
@@ -97,26 +88,33 @@ class _LoginPageState extends State<LoginPage> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.blue[300],
-                          blurRadius: 10.0, // has the effect of softening the shadow
-                          spreadRadius: 1.0, // has the effect of extending the shadow
+                          blurRadius:
+                              10.0, // has the effect of softening the shadow
+                          spreadRadius:
+                              1.0, // has the effect of extending the shadow
                           offset: Offset(
                             5.0, // horizontal, move right 10
                             5.0, // vertical, move down 10
                           ),
                         ),
                       ],
-                      color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30)),
                   child: FlatButton(
-                    onPressed: () async{
-                      if(_formKey.currentState.validate()) {
-                        dynamic result = await _auth
-                            .signInWithEmailAndPassword(email, password);
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        dynamic result = await _auth.signInWithEmailAndPassword(
+                            email, password);
                         if (result == null) {
                           setState(() => error = 'Incorrect email or password');
-                        } else{
+                        } else {
                           print(result);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => HomePage(result: result.toString())));
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomePage(result: result.toString())));
                         }
                       }
                     },
@@ -136,13 +134,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-                FirstTime(),
-              ],
-            ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 24),
+              ),
+              FirstTime(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-

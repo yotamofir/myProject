@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:BookIt/pages/login.page.dart';
+
+import '../pages/login.page.dart';
 
 class UserOld extends StatelessWidget {
   @override
@@ -26,7 +27,7 @@ class UserOld extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => LoginPage()));
               },
               child: Text(
-                'Sing in',
+                'Sign in',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,

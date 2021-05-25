@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:BookIt/pages/newuser.page.dart';
+
+import '../pages/newuser.page.dart';
 
 class FirstTime extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _FirstTimeState extends State<FirstTime> {
                     MaterialPageRoute(builder: (context) => NewUser()));
               },
               child: Text(
-                'Sing up',
+                'Sign up',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
