@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "861323157",
+    "firebase_url": "https://bookit-19695-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bookit-19695",
+    "storage_bucket": "bookit-19695.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861323157:android:35286364d20192904fc09c",
+        "android_client_info": {
+          "package_name": "com.example.BookIt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861323157-1vmobf6msc6l7d5ak3e09atgiscpd01l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEuFhft8jBeFwOfO2neCVP1gV10UApf8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861323157-1vmobf6msc6l7d5ak3e09atgiscpd01l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "861323157-0dn0t2br47fuuk3pgnt8dblrsluto7ca.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.BookIt"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861323157:android:629b678b49ab7d094fc09c",
+        "android_client_info": {
+          "package_name": "com.example.photo_gallery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861323157-1vmobf6msc6l7d5ak3e09atgiscpd01l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEuFhft8jBeFwOfO2neCVP1gV10UApf8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861323157-1vmobf6msc6l7d5ak3e09atgiscpd01l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "861323157-0dn0t2br47fuuk3pgnt8dblrsluto7ca.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.BookIt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
