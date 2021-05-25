@@ -28,6 +28,7 @@ class _FirstTimeState extends State<FirstTime> {
             FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => NewUser()));
               },
